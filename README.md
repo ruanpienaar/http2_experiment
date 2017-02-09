@@ -40,7 +40,7 @@ Then try it:
 curl --http2 -I nghttp2.org
 ```
 
-Once working, compile the example, and start it
+Once working, compile the example, and start it ( exposes tcpv4 port 8443 )
 ```
 $ make
 $ ./start-dev/sh
