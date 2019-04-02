@@ -23,12 +23,13 @@ start(_StartType, _StartArgs) ->
             {"/", h2e_handler, []}
         ]}
     ]),
-    {ok, _} = cowboy:start_tls(https, 100, [
+    {ok, _} = cowboy:start_tls(https, [
         {port, 8443},
         {cacertfile, "priv/ssl/cowboy-ca.crt"},
         {certfile, "priv/ssl/server.crt"},
         {keyfile, "priv/ssl/server.key"}
     ], #{env => #{dispatch => Dispatch}}),
+    ok = application:start(gun),
     h2e_sup:start_link().
 
 stop(_State) ->

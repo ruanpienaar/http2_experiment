@@ -5,7 +5,10 @@
   {registered, []},
   {applications, [
                   kernel,
-                  stdlib
+                  stdlib,
+                  cowboy,
+                  ranch,
+                  gun
                  ]},
   {mod, { h2e_app, []}},
   {env, []}
