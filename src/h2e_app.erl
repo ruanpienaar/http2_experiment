@@ -15,7 +15,8 @@
 %% ===================================================================
 
 start() ->
-    [ application:start(A) || A <- [crypto, asn1, public_key, ssl, ranch, cowlib, cowboy, h2e] ].
+    % [ application:start(A) || A <- [crypto, asn1, public_key, ssl, ranch, cowlib, cowboy, h2e] ].
+    application:ensure_all_started(h2e).
 
 start(_StartType, _StartArgs) ->
     Dispatch = cowboy_router:compile([
@@ -29,7 +30,6 @@ start(_StartType, _StartArgs) ->
         {certfile, "priv/ssl/server.crt"},
         {keyfile, "priv/ssl/server.key"}
     ], #{env => #{dispatch => Dispatch}}),
-    ok = application:start(gun),
     h2e_sup:start_link().
 
 stop(_State) ->
